@@ -15,7 +15,9 @@ Feature: Click on the next button on payment plans page
         Given user is on the enrollment page
         And user has completed start application step
 
-
+    #=============
+    # AC1
+    #-------------
     #Scenario: Clicking on upfront payment plan activates the next button
     #    Then the next button is disabled by default
     #    When user clicks upfront payment plan
@@ -25,6 +27,7 @@ Feature: Click on the next button on payment plans page
     #    Then the next button is disabled by default
     #    When user clicks installments payment plan
     #    Then the next button is enabled
+
 
     @sep16-1
     Scenario Outline: Clicking on any payment plan activates the next button
@@ -37,6 +40,9 @@ Feature: Click on the next button on payment plans page
             | upfront      |
             | installments |
 
+    #=============
+    # AC2 - AC3
+    #-------------
     @sep16-2
     Scenario: clicking on next button navigates to step 3 page
         When user clicks "upfront" payment plan
@@ -45,7 +51,9 @@ Feature: Click on the next button on payment plans page
         And the payment plan stepper circle is green
         And the start application stepper circle is green
 
-
+    #=================
+    # AC4 - AC5 - AC6
+    #-----------------
     @sep16-3
     Scenario: price summary should be displayed after selecting a payment
         When user clicks "upfront" payment plan
@@ -53,3 +61,4 @@ Feature: Click on the next button on payment plans page
         When user clicks "installments" payment plan
         Then the installments payment summary is displayed
         And the back button is displayed and enabled
+        
