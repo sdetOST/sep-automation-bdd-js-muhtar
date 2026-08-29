@@ -1,0 +1,11 @@
+=================================================
+Environmental Variables  // Needs to be configured inside user-settings-json file 
+-------------------------------------------------
+SEP_QA_URL = https://qa.sep.tdtm.cydeo.com/taws
+SEP_USERNAME = automation-user
+SEP_PASSWORD = 123abc
+
+CARD_NUMBER = 4242424242424242
+EXPIRATION_DATE = 12/28
+CVC = 368
+ZIP_CODE = 22102
