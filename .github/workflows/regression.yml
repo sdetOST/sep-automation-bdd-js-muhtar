@@ -1,7 +1,12 @@
 name: Regression Tests
 
 on: # when the workflow should run
-
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
   # push: # Automatically run the workflow when a push is made to the main branch
   #   branches:
   #     - master
@@ -14,6 +19,8 @@ on: # when the workflow should run
     - cron: '41 2 * * *' # Runs daily at 12:00 PM EST (UTC equivalent for EST)
 
   workflow_dispatch: # Allows manual triggering of the workflow from the GitHub Actions tab
+
+
 
 jobs:
   regression-tests:
