@@ -9,3 +9,9 @@ CARD_NUMBER = 4242424242424242
 EXPIRATION_DATE = 12/28
 CVC = 368
 ZIP_CODE = 22102
+
+-------------------------------------------------------
+
+    SEP_QA_URL: ${{ secrets.SEP_QA_URL}}
+    SEP_USERNAME: ${{secrets.SEP_USERNAME}}
+    SEP_PASSWORD: ${{secrets.SEP_PASSWORD}}
