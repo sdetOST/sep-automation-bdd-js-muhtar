@@ -11,7 +11,7 @@ on: # when the workflow should run
   #     - master
 
   schedule: # Automatically run the workflow on a schedule (daily at 12:00 PM EST)
-    - cron: '0 17 * * *' # Runs daily at 12:00 PM EST (UTC equivalent for EST)
+    - cron: '41 2 * * *' # Runs daily at 12:00 PM EST (UTC equivalent for EST)
 
   workflow_dispatch: # Allows manual triggering of the workflow from the GitHub Actions tab
 
