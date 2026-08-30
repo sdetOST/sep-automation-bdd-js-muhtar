@@ -53,10 +53,8 @@ Steps "to do" for each user story  / Repo-GitHub Management
 	This integrates your feature into the develop branch
 
 
-
-
 ================================================================
-    papackage.json // origin   
+    papackage.json //  first origin 
 ----------------------------------------------------------------    
 {
   "name": "sep-automation",
@@ -88,7 +86,7 @@ Steps "to do" for each user story  / Repo-GitHub Management
 
 
 ================================================================
-    globalPagesSetup.js // origin   
+    globalPagesSetup.js // first origin   
 ----------------------------------------------------------------  
 
 import { LeftMainPage } from "./pages/LeftMainPage.js";
