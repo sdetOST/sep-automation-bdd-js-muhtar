@@ -54,7 +54,7 @@ Steps "to do" for each user story  / Repo-GitHub Management
 
 
 ================================================================
-    papackage.json //  first origin 
+    papackage.json //  origin 
 ----------------------------------------------------------------    
 {
   "name": "sep-automation",
@@ -86,7 +86,7 @@ Steps "to do" for each user story  / Repo-GitHub Management
 
 
 ================================================================
-    globalPagesSetup.js // first origin   
+    globalPagesSetup.js // origin   
 ----------------------------------------------------------------  
 
 import { LeftMainPage } from "./pages/LeftMainPage.js";
