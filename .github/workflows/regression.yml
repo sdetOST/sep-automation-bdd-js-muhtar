@@ -55,7 +55,7 @@ jobs:
     
       # Run regression tests
       - name: Run regression tests
-        run: npm run tests
+        run: npm run test
     
       # Upload Cucumber report
       - name: Upload Cucumber report
