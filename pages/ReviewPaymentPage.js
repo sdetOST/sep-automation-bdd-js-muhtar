@@ -82,6 +82,7 @@ export class ReviewPaymentPage extends BasePage {
     this.cardCVCErrorMessage = this.paymentFrame.locator(
       "//p[@id='Field-cvcError' and @class='p-FieldError Error' and @role='alert']"
     );
+    this.cvcErrorMessage = this.cardCVCErrorMessage;
     this.zipCodeErrorMessage = this.paymentFrame.locator(
       "//p[@id='Field-postalCodeError' and @class='p-FieldError Error' and @role='alert']"
     );
@@ -136,6 +137,11 @@ export class ReviewPaymentPage extends BasePage {
     await this.cardNumberInput.fill('');
   }
 
+  async clearCVC() {
+    await this.cvcInput.fill('');
+  }
+
+
   /**
    * Reads card numbers from a JSON file in the data folder and tests each invalid card number.
    * @param {string} fileName
@@ -153,6 +159,26 @@ export class ReviewPaymentPage extends BasePage {
       await this.enterCardNumber(number);
       await this.cardNumberInput.press('Tab');
       await expect(this.cardNumberErrorMessage).toHaveText('Your card number is invalid.');
+    }
+  }
+
+    /**
+   * Reads CVC numbers from a JSON file in the data folder and tests each invalid CVC number.
+   * @param {string} fileName
+   */
+  async enterInvalidCvcNumbersFromFile(fileName) {
+    const dataPath = path.resolve(process.cwd(), 'data', fileName);
+    const fileContent = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+    const cvcNumbers = Array.isArray(fileContent)
+      ? fileContent
+      : (fileContent.invalidCVC || fileContent.invalidCvc || Object.values(fileContent));
+
+    for (let i = 0; i < cvcNumbers.length; i++) {
+      const number = cvcNumbers[i];
+      await this.clearCVC();
+      await this.enterCVC(number);
+      await this.cvcInput.press('Tab');
+      await expect(this.cardCVCErrorMessage).toHaveText("Your security code is incomplete.");
     }
   }
 

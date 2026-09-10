@@ -18,5 +18,8 @@ When('user enters invalid card numbers from {string}', async function (fileName)
 });
 
 Then('user should see the error message {string}', async function (string) {
-    await expect(reviewPaymentPage.cardNumberErrorMessage).toHaveText(string);
+    const errorAlert = reviewPaymentPage.paymentFrame.locator(
+        "//p[contains(@class, 'p-FieldError') and @role='alert']"
+    );
+    await expect(errorAlert).toHaveText(string);
 });
