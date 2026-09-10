@@ -1,4 +1,5 @@
 import { BasePage } from "./BasePage.js";
+import { expect } from "@playwright/test";
 
 export class PaymentPlanPage extends BasePage {
   /**
@@ -23,6 +24,10 @@ export class PaymentPlanPage extends BasePage {
 
     this.upfrontPaymentFrame = page.locator(
       "(//mat-expansion-panel-header[@role='button'])[1]"
+    );
+
+    this.upfrontAccordionPanel = page.locator(
+      "(//mat-accordion//mat-expansion-panel)[1]"
     );
 
     this.greenBadgeUpfrontDiscount = page.locator(
@@ -83,6 +88,10 @@ export class PaymentPlanPage extends BasePage {
 
     this.installmentsPaymentFrame = page.locator(
       "(//mat-expansion-panel-header[@role='button'])[2]"
+    );
+
+    this.installmentsAccordionPanel = page.locator(
+      "(//mat-accordion//mat-expansion-panel)[2]"
     );
 
     this.installmentsPaymentAmount = page.locator(
@@ -186,6 +195,59 @@ export class PaymentPlanPage extends BasePage {
     await this.activeNextButton.click();
   }
 
+  /**
+   * Returns the header frame locator for the given payment plan.
+   * @param {string} paymentPlan
+   * @returns {import('@playwright/test').Locator}
+   */
+  getPaymentPlanFrame(paymentPlan) {
+    paymentPlan = paymentPlan.toLowerCase();
+    switch (true) {
+      case paymentPlan.includes('upfront'):
+        return this.upfrontPaymentFrame;
+      case paymentPlan.includes('installments'):
+        return this.installmentsPaymentFrame;
+      default:
+        throw new Error(`Invalid payment plan: ${paymentPlan}`);
+    }
+  }
 
+  /**
+   * Returns the accordion panel locator for the given payment plan.
+   * @param {string} paymentPlan
+   * @returns {import('@playwright/test').Locator}
+   */
+  getPaymentPlanAccordion(paymentPlan) {
+    paymentPlan = paymentPlan.toLowerCase();
+    switch (true) {
+      case paymentPlan.includes('upfront'):
+        return this.upfrontAccordionPanel;
+      case paymentPlan.includes('installments'):
+        return this.installmentsAccordionPanel;
+      default:
+        throw new Error(`Invalid payment plan: ${paymentPlan}`);
+    }
+  }
+
+  /**
+   * Verifies that the specified payment plan accordion option is highlighted (selected).
+   * @param {string} paymentPlan
+   */
+  async verifyPaymentPlanHighlighted(paymentPlan) {
+    const frame = this.getPaymentPlanFrame(paymentPlan);
+    await expect(frame).toBeVisible();
+    await expect(frame).toHaveAttribute('aria-expanded', 'true');
+    await expect(frame).toHaveClass(/mat-expanded/);
+  }
+
+  /**
+   * Verifies that the specified payment plan accordion option is not highlighted (collapsed).
+   * @param {string} paymentPlan
+   */
+  async verifyPaymentPlanNotHighlighted(paymentPlan) {
+    const frame = this.getPaymentPlanFrame(paymentPlan);
+    await expect(frame).toBeVisible();
+    await expect(frame).toHaveAttribute('aria-expanded', 'false');
+  }
 
 }
