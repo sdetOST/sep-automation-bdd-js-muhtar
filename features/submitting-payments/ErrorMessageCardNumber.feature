@@ -40,8 +40,10 @@ Feature: Error message for the invalid card number
             | 1234123412340000    |
             | 0000226622221111    |
 
-
-
-
+    @sep25-3
+    Scenario: card error message is displayed when user enters invalid card number from data.json
+        When user enters invalid card numbers from "data.json"
+        And user clicks the terms and contidions checkbox
+        Then user should see the error message "Your card number is invalid."
 
 
