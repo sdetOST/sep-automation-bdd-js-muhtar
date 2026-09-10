@@ -1,4 +1,7 @@
 import { BasePage } from "./BasePage.js";
+import { expect } from "@playwright/test";
+import fs from "fs";
+import path from "path";
 
 export class ReviewPaymentPage extends BasePage {
   /**
@@ -127,6 +130,30 @@ export class ReviewPaymentPage extends BasePage {
 
   async clickBackButton() {
     await this.backButton.click();
+  }
+
+  async clearCardNumber() {
+    await this.cardNumberInput.fill('');
+  }
+
+  /**
+   * Reads card numbers from a JSON file in the data folder and tests each invalid card number.
+   * @param {string} fileName
+   */
+  async enterInvalidCardNumbersFromFile(fileName) {
+    const dataPath = path.resolve(process.cwd(), 'data', fileName);
+    const fileContent = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+    const cardNumbers = Array.isArray(fileContent)
+      ? fileContent
+      : (fileContent.invalidCardNumbers || Object.values(fileContent));
+
+    for (let i = 0; i < cardNumbers.length; i++) {
+      const number = cardNumbers[i];
+      await this.clearCardNumber();
+      await this.enterCardNumber(number);
+      await this.cardNumberInput.press('Tab');
+      await expect(this.cardNumberErrorMessage).toHaveText('Your card number is invalid.');
+    }
   }
 
   async clickPayButton() {
