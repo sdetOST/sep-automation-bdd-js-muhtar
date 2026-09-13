@@ -6,6 +6,7 @@
     "test": "npx cucumber-js",
     "test:sep25": "npx cucumber-js --tags @sep25",
     "test:sep29": "npx cucumber-js --tags @sep29",
+    "test:sep25sep29": "npx cucumber-js --tags @sep25,@sep29",
     "test:tag:dryrun": "npx cucumber-js --tags @sep11 --dry-run",
     "test:smoke": "npx cucumber-js --tags @smoke",
     "Mac-open:report": "open reports/cucumber-report.html",
